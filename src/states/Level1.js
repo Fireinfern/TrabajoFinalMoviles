@@ -11,8 +11,8 @@ Level1.prototype = {
         this.enemies = this.game.add.group();
         this.createEnemies();
 
-        let _player = new Player(this.game, 100, 100);
-        this.player = this.game.add.existing(_player);
+        let _player = this.map.objects.Objects.filter(({name}) => {return name == "Player"})[0];
+        this.player = this.game.add.existing(new Player(this.game, _player.x, _player.y));
 
         this.game.camera.follow(this.player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 

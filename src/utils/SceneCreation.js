@@ -8,7 +8,7 @@ function BackgroundCreation(state, skyKey, backgroundKey) {
 
 function CreateTilemap(state, levelKey) {
     state.map = state.game.add.tilemap(levelKey);
-    
+
     state.map.addTilesetImage('Forest_tileset', 'tiles');
 
     state.PlatformLayer = state.map.createLayer(0);
