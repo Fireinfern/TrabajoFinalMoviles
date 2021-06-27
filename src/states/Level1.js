@@ -2,15 +2,12 @@ Level1 = function (game) { }
 
 Level1.prototype = {
     create() {
-        this.background = this.game.add.tileSprite(0, 0, 1500, 400, 'sky');
-        this.background.scale.setTo(0.84);
-        this.background = this.game.add.tileSprite(0, 0, 1500, 400, 'hills1');
-        this.background.scale.setTo(0.84);
-        
+        BackgroundCreation(this, 'sky', 'hills1');
+
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        this.createLevelTilemap();
-        
+        CreateTilemap(this, 'level0');
+
         this.enemies = this.game.add.group();
         this.createEnemies();
 
@@ -64,25 +61,16 @@ Level1.prototype = {
         this.YouDiedText.events.onInputDown.add(this.resetLevel, this);
         this.TryAgainText.events.onInputDown.add(this.resetLevel, this);
     },
-    resetLevel(){
+    resetLevel() {
         this.game.state.start("Level1", true, false);
     },
-    createLevelTilemap(){
-        this.map = this.game.add.tilemap("level0");
-        this.map.addTilesetImage('Forest_tileset', 'tiles');
+    createEnemies() {
+        this.map.objects.Objects.forEach((enemy) => {
+            if (enemy.name == "Enemy") {
+                let newEnemy = new Enemy(this.game, enemy.x, enemy.y);
+                this.enemies.add(newEnemy);
+            }
+        }, this);
 
-        this.PlatformLayer = this.map.createLayer(0);
-        this.PlatformLayer.resizeWorld();
-        this.NoCollisionLayer = this.map.createLayer(1);
-        this.CosmeticsLayer = this.map.createLayer(2);
-        this.DamageLayer = this.map.createLayer(3);
-
-        this.game.physics.arcade.enable(this.PlatformLayer);
-        this.map.setCollisionBetween(1, 1000, true, 'Platforms');
-        this.map.setCollisionBetween(1, 1053, true, 'Damage');
-    },
-    createEnemies(){
-        let enemy = new Enemy(this.game, 600,100);
-        this.enemies.add(enemy);
     }
 }
