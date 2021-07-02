@@ -21,3 +21,17 @@ function CreateTilemap(state, levelKey) {
     state.map.setCollisionBetween(1, 1000, true, 'Platforms');
     state.map.setCollisionBetween(1, 1053, true, 'Damage');
 }
+
+function CreateEnemies(scene) {
+    scene.map.objects.Objects.forEach((enemy) => {
+        if (enemy.name == "Enemy") {
+            let newEnemy = new Enemy(scene.game, enemy.x, enemy.y, scene.map);
+            scene.enemies.add(newEnemy);
+        }
+    }, scene);
+}
+
+function CreatePlayer(scene) {
+    let _player = scene.map.objects.Objects.filter(({ name }) => { return name == "Player" })[0];
+    scene.player = scene.game.add.existing(new Player(scene.game, _player.x, _player.y));
+}

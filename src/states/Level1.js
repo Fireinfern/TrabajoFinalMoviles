@@ -9,12 +9,12 @@ Level1.prototype = {
         CreateTilemap(this, 'level0');
 
         this.enemies = this.game.add.group();
-        this.createEnemies();
-
-        let _player = this.map.objects.Objects.filter(({name}) => {return name == "Player"})[0];
-        this.player = this.game.add.existing(new Player(this.game, _player.x, _player.y));
-
+        CreateEnemies(this);
+        CreatePlayer(this);
+        
         this.game.camera.follow(this.player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+
+        this.game.camera.fadeIn();
 
         this.cursors = this.game.input.keyboard.createCursorKeys();
 
@@ -63,14 +63,5 @@ Level1.prototype = {
     },
     resetLevel() {
         this.game.state.start("Level1", true, false);
-    },
-    createEnemies() {
-        this.map.objects.Objects.forEach((enemy) => {
-            if (enemy.name == "Enemy") {
-                let newEnemy = new Enemy(this.game, enemy.x, enemy.y);
-                this.enemies.add(newEnemy);
-            }
-        }, this);
-
     }
 }
