@@ -51,7 +51,7 @@ Level3.prototype = {
                 this.emitter.start(false, 5000, 20);
                 this.player.alpha = 0;
                 this.player.Die();
-                this.mainMenu();
+                this.winText();
             }
         });
 
