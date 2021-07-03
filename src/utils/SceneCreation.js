@@ -1,8 +1,8 @@
 function BackgroundCreation(state, skyKey, backgroundKey) {
-    state[skyKey] = state.game.add.tileSprite(0, 0, 1500, 400, skyKey);
+    state[skyKey] = state.game.add.tileSprite(0, 0, 2000, 400, skyKey);
     state[skyKey].scale.setTo(0.84);
 
-    state[backgroundKey] = state.game.add.tileSprite(0, 0, 1500, 400, backgroundKey);
+    state[backgroundKey] = state.game.add.tileSprite(0, 0, 2000, 400, backgroundKey);
     state[backgroundKey].scale.setTo(0.84);
 }
 
@@ -18,8 +18,8 @@ function CreateTilemap(state, levelKey) {
     state.DamageLayer = state.map.createLayer(3);
 
     state.game.physics.arcade.enable(state.PlatformLayer);
-    state.map.setCollisionBetween(1, 1000, true, 'Platforms');
-    state.map.setCollisionBetween(1, 1053, true, 'Damage');
+    state.map.setCollisionBetween(1, 1100, true, 'Platforms');
+    state.map.setCollisionBetween(1, 1100, true, 'Damage');
 }
 
 function CreateEnemies(scene) {
