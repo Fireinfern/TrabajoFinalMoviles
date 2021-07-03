@@ -16,6 +16,6 @@ Preload.prototype = {
         this.game.load.spritesheet('enemie', "./assets/characters/Character_3.png", 24,24,30);
     },
     create() {
-        this.game.state.start("Level3", true, false);
+        this.game.state.start("Level1", true, false);
     }
 }

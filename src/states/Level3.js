@@ -11,6 +11,11 @@ Level3.prototype = {
         this.enemies = this.game.add.group();
         CreateEnemies(this);
         CreatePlayer(this);
+
+        let _Finish = this.map.objects.Objects.filter(({ name }) => { return name == "Finish" })[0];
+        this.Finish = this.game.add.sprite( _Finish.x, _Finish.y, 'Finish');
+        this.Finish.alpha = 0;
+        this.game.physics.arcade.enable(this.Finish);
         
         this.game.camera.follow(this.player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 

@@ -151,6 +151,38 @@
                  "width":16,
                  "x":301,
                  "y":190
+                }, 
+                {
+                 "height":16,
+                 "id":4,
+                 "name":"Finish",
+                 "properties":[
+                        {
+                         "name":"__anchorX",
+                         "type":"int",
+                         "value":862
+                        }, 
+                        {
+                         "name":"__anchorY",
+                         "type":"int",
+                         "value":199
+                        }, 
+                        {
+                         "name":"__cx",
+                         "type":"int",
+                         "value":53
+                        }, 
+                        {
+                         "name":"__cy",
+                         "type":"int",
+                         "value":12
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":854,
+                 "y":191
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -159,7 +191,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":4,
+ "nextobjectid":5,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.5.0",
