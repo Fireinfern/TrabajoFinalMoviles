@@ -13,16 +13,19 @@ Level3.prototype = {
         CreatePlayer(this);
 
         let _Finish = this.map.objects.Objects.filter(({ name }) => { return name == "Finish" })[0];
-        this.Finish = this.game.add.sprite( _Finish.x, _Finish.y, 'Finish');
+        this.Finish = this.game.add.sprite(_Finish.x, _Finish.y, 'Finish');
         this.Finish.alpha = 0;
         this.game.physics.arcade.enable(this.Finish);
-        
+
         this.game.camera.follow(this.player, Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 
         this.game.camera.fadeIn();
 
         this.cursors = this.game.input.keyboard.createCursorKeys();
 
+        this.emitter = this.game.add.emitter(this.game.camera.centerX, this.game.camera.centerY, 200);
+        this.emitter.makeParticles(['pixel_blue', 'pixel_red', 'pixel_green', 'pixel_white', 'pixel_yellow']);
+        this.particlesOnce = true;
     },
     update() {
         this.game.physics.arcade.collide(this.player, this.PlatformLayer);
@@ -37,6 +40,18 @@ Level3.prototype = {
             if (this.player.data.alive) {
                 player.Die();
                 this.dieText();
+            }
+        });
+
+        this.game.physics.arcade.overlap(this.player, this.Finish, () => {
+            if(this.particlesOnce){
+                this.particlesOnce = false;
+                this.emitter.x = this.game.camera.centerX; 
+                this.emitter.y = this.game.camera.centerY
+                this.emitter.start(false, 5000, 20);
+                this.player.alpha = 0;
+                this.player.Die();
+                this.mainMenu();
             }
         });
 
@@ -66,7 +81,29 @@ Level3.prototype = {
         this.YouDiedText.events.onInputDown.add(this.resetLevel, this);
         this.TryAgainText.events.onInputDown.add(this.resetLevel, this);
     },
+    winText(){
+        this.YouWinText = this.game.add.text(0, 0, "You Won!");
+        this.YouWinText.font = 'Press Start 2P';
+        this.YouWinText.anchor.setTo(0.5);
+        this.YouWinText.x = this.game.camera.centerX;
+        this.YouWinText.y = this.game.camera.centerY;
+        this.YouWinText.inputEnabled = true;
+
+        this.MenuText = this.game.add.text(0, 0, "tap to go to Main Menu");
+        this.MenuText.font = 'Press Start 2P';
+        this.MenuText.anchor.setTo(0.5);
+        this.MenuText.x = this.game.camera.centerX;
+        this.MenuText.y = this.game.camera.centerY + 40;
+        this.MenuText.fontSize = 14;
+        this.MenuText.inputEnabled = true;
+
+        this.YouWinText.events.onInputDown.add(this.mainMenu, this);
+        this.MenuText.events.onInputDown.add(this.mainMenu, this);
+    },
     resetLevel() {
         this.game.state.start("Level3", true, false);
+    },
+    mainMenu() {
+        this.game.state.start("Level1", true, false);
     }
 }

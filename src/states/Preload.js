@@ -14,6 +14,12 @@ Preload.prototype = {
         this.game.load.image('sky', './assets/background/background-sky.png');
         this.game.load.spritesheet('player', "./assets/characters/Character_2.png", 24,24,30);
         this.game.load.spritesheet('enemie', "./assets/characters/Character_3.png", 24,24,30);
+        //Particles
+        this.game.load.image('pixel_blue', './assets/particles/pixel_blue.png');
+        this.game.load.image('pixel_green', './assets/particles/pixel_green.png');
+        this.game.load.image('pixel_red', './assets/particles/pixel_red.png');
+        this.game.load.image('pixel_white', './assets/particles/pixel_white.png');
+        this.game.load.image('pixel_yellow', './assets/particles/pixel_yellow.png');
     },
     create() {
         this.game.state.start("Level1", true, false);
