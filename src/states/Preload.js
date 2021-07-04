@@ -22,6 +22,6 @@ Preload.prototype = {
         this.game.load.image('pixel_yellow', './assets/particles/pixel_yellow.png');
     },
     create() {
-        this.game.state.start("Level1", true, false);
+        this.game.state.start("Menu");
     }
 }

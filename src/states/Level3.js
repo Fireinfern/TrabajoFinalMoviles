@@ -104,6 +104,6 @@ Level3.prototype = {
         this.game.state.start("Level3", true, false);
     },
     mainMenu() {
-        this.game.state.start("Level1", true, false);
+        this.game.state.start("Menu");
     }
 }
