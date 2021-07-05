@@ -4,6 +4,9 @@ Level3.prototype = {
     create() {
         BackgroundCreation(this, 'sky', 'hills1');
 
+        this.playerName = "";
+        this.database = firebase.database();
+
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
         CreateTilemap(this, 'level2');
@@ -44,14 +47,15 @@ Level3.prototype = {
         });
 
         this.game.physics.arcade.overlap(this.player, this.Finish, () => {
-            if(this.particlesOnce){
+            if (this.particlesOnce) {
                 this.particlesOnce = false;
-                this.emitter.x = this.game.camera.centerX; 
+                this.emitter.x = this.game.camera.centerX;
                 this.emitter.y = this.game.camera.centerY
                 this.emitter.start(false, 5000, 20);
                 this.player.alpha = 0;
                 this.player.Die();
                 this.winText();
+                this.captureKeys();
             }
         });
 
@@ -81,7 +85,7 @@ Level3.prototype = {
         this.YouDiedText.events.onInputDown.add(this.resetLevel, this);
         this.TryAgainText.events.onInputDown.add(this.resetLevel, this);
     },
-    winText(){
+    winText() {
         this.YouWinText = this.game.add.text(0, 0, "You Won!");
         this.YouWinText.font = 'Press Start 2P';
         this.YouWinText.anchor.setTo(0.5);
@@ -89,21 +93,46 @@ Level3.prototype = {
         this.YouWinText.y = this.game.camera.centerY;
         this.YouWinText.inputEnabled = true;
 
+        this.playerNameText = this.game.add.text(0, 0, this.playerName);
+        this.playerNameText.font = 'Press Start 2P';
+        this.playerNameText.anchor.setTo(0.5);
+        this.playerNameText.x = this.game.camera.centerX;
+        this.playerNameText.y = this.game.camera.centerY + 40;
+        this.playerNameText.inputEnabled = true;
+
         this.MenuText = this.game.add.text(0, 0, "tap to go to Main Menu");
         this.MenuText.font = 'Press Start 2P';
         this.MenuText.anchor.setTo(0.5);
         this.MenuText.x = this.game.camera.centerX;
-        this.MenuText.y = this.game.camera.centerY + 40;
+        this.MenuText.y = this.game.camera.centerY + 80;
         this.MenuText.fontSize = 14;
         this.MenuText.inputEnabled = true;
 
-        this.YouWinText.events.onInputDown.add(this.mainMenu, this);
+        //this.YouWinText.events.onInputDown.add(this.mainMenu, this);
         this.MenuText.events.onInputDown.add(this.mainMenu, this);
     },
     resetLevel() {
         this.game.state.start("Level3", true, false);
     },
     mainMenu() {
+        if(this.playerName.length < 4){
+            this.game.camera.flash(0xff0000, 500);
+            return;
+        }
+        let date = Date.now();
+        this.database.ref("/trabajofinal/" + date.toString()).set({
+            date: date,
+            name: this.playerName
+        })
         this.game.state.start("Menu");
+    },
+    captureKeys() {
+        this.game.input.keyboard.addCallbacks(this, null, null, (char) => {
+            if (this.playerName.length < 4) {
+                this.playerName += char;
+                this.playerNameText.text = this.playerName;
+            }
+            console.log(this.playerName);
+        })
     }
 }
