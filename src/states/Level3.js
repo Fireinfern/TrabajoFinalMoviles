@@ -67,14 +67,15 @@ Level3.prototype = {
         //this.game.debug.body(this.player);
     },
     dieText() {
-        this.YouDiedText = this.game.add.text(0, 0, "You died!")
+        this.YouDiedText = this.game.add.text(0, 0, "Te uniste a los cazadores!")
         this.YouDiedText.font = 'Press Start 2P';
         this.YouDiedText.anchor.setTo(0.5);
         this.YouDiedText.x = this.game.camera.centerX;
         this.YouDiedText.y = this.game.camera.centerY;
+        this.YouDiedText.fontSize = 14;
         this.YouDiedText.inputEnabled = true;
 
-        this.TryAgainText = this.game.add.text(0, 0, "tap to try again")
+        this.TryAgainText = this.game.add.text(0, 0, "volver a intentar")
         this.TryAgainText.font = 'Press Start 2P';
         this.TryAgainText.anchor.setTo(0.5);
         this.TryAgainText.x = this.game.camera.centerX;
@@ -86,11 +87,12 @@ Level3.prototype = {
         this.TryAgainText.events.onInputDown.add(this.resetLevel, this);
     },
     winText() {
-        this.YouWinText = this.game.add.text(0, 0, "You Won!");
+        this.YouWinText = this.game.add.text(0, 0, "Ganaste!");
         this.YouWinText.font = 'Press Start 2P';
         this.YouWinText.anchor.setTo(0.5);
         this.YouWinText.x = this.game.camera.centerX;
         this.YouWinText.y = this.game.camera.centerY;
+        this.YouWinText.fontSize = 14;
         this.YouWinText.inputEnabled = true;
 
         this.playerNameText = this.game.add.text(0, 0, this.playerName);
@@ -100,7 +102,7 @@ Level3.prototype = {
         this.playerNameText.y = this.game.camera.centerY + 40;
         this.playerNameText.inputEnabled = true;
 
-        this.MenuText = this.game.add.text(0, 0, "tap to go to Main Menu");
+        this.MenuText = this.game.add.text(0, 0, "volver al menu");
         this.MenuText.font = 'Press Start 2P';
         this.MenuText.anchor.setTo(0.5);
         this.MenuText.x = this.game.camera.centerX;

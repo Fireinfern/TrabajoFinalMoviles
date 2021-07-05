@@ -4,7 +4,7 @@ Menu.prototype = {
 	create(){
 		BackgroundCreation(this, 'sky', 'hills1');
 
-		this.titleText = this.game.add.text(60, 80,"Beware of the Hunters",{ fontSize: '40px' });
+		this.titleText = this.game.add.text(60, 80,"Beware of the Hunters",{ fontSize: '30px' });
 		this.titleText.fill = "#000";
 		
 		this.playText = this.game.add.text(195,this.game.height - 90,'Jugar',{ fontSize: '25px' });

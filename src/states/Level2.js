@@ -52,14 +52,15 @@ Level2.prototype = {
         //this.game.debug.body(this.player);
     },
     dieText() {
-        this.YouDiedText = this.game.add.text(0, 0, "You died!")
+        this.YouDiedText = this.game.add.text(0, 0, "Te uniste a los cazadores!")
         this.YouDiedText.font = 'Press Start 2P';
         this.YouDiedText.anchor.setTo(0.5);
         this.YouDiedText.x = this.game.camera.centerX;
         this.YouDiedText.y = this.game.camera.centerY;
+        this.YouDiedText.fontSize = 14;
         this.YouDiedText.inputEnabled = true;
 
-        this.TryAgainText = this.game.add.text(0, 0, "tap to try again")
+        this.TryAgainText = this.game.add.text(0, 0, "volver a intentar")
         this.TryAgainText.font = 'Press Start 2P';
         this.TryAgainText.anchor.setTo(0.5);
         this.TryAgainText.x = this.game.camera.centerX;
